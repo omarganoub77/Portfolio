@@ -1,0 +1,410 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Omar Ganoub Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-width dark sheet. Sticky top bar, hero with a face-detection frame, one featured project, a two-up row, then ledger-style experience and a skills matrix. Dark-first, light as fallback. */
+:root {
+  --bg: #0a0e16;
+  --surface: #121826;
+  --surface-2: #19202f;
+  --fg: #e8ebf3;
+  --muted: #8f99b0;
+  --line: #242c3e;
+  --accent: #ffb020;
+  --accent-ink: #1a1203;
+  --accent-soft: rgba(255, 176, 32, 0.12);
+  --ok: #4fd1a5;
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f4f5f8; --surface: #ffffff; --surface-2: #eceef4; --fg: #10141d;
+    --muted: #596176; --line: #d9dce6; --accent: #b45f00; --accent-ink: #ffffff;
+    --accent-soft: rgba(180, 95, 0, 0.1); --ok: #0f7a5a;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f4f5f8; --surface: #ffffff; --surface-2: #eceef4; --fg: #10141d;
+  --muted: #596176; --line: #d9dce6; --accent: #b45f00; --accent-ink: #ffffff;
+  --accent-soft: rgba(180, 95, 0, 0.1); --ok: #0f7a5a;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-block: 0 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+/* top bar */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+}
+.bar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.mark { font-family: var(--mono); font-size: 13px; color: var(--accent); text-decoration: none; }
+.bar nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.bar nav a { font-family: var(--mono); font-size: 13px; color: var(--muted); text-decoration: none; }
+.bar nav a:hover { color: var(--fg); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 56px; align-items: center; padding-block: 88px 72px; }
+.eyebrow { font-family: var(--mono); font-size: 13px; color: var(--accent); margin: 0 0 20px; }
+h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(44px, 7vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+  text-wrap: balance;
+}
+.lede { font-size: 19px; color: var(--muted); max-width: 46ch; margin: 0 0 32px; }
+.lede b { color: var(--fg); font-weight: 500; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.btn { font-family: var(--mono); font-size: 14px; background: var(--accent); color: var(--accent-ink); padding: 12px 20px; border-radius: 4px; text-decoration: none; font-weight: 500; }
+.avail { font-size: 14px; color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+.avail i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex: none; }
+
+.frame { width: 100%; max-width: 380px; justify-self: end; }
+.frame svg { display: block; width: 100%; height: auto; }
+.frame .c { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: square; }
+.frame .face { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.frame .grid { stroke: var(--line); stroke-width: 1; }
+.frame text { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+.frame .hl { fill: var(--accent); }
+
+/* sections */
+section { padding-block: 40px; scroll-margin-top: 70px; }
+.head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 0 0 28px; flex-wrap: wrap; }
+h2.title { font-family: var(--display); font-weight: 700; font-size: 34px; letter-spacing: -0.02em; margin: 0; }
+.head span { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 32px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.card h3 { font-family: var(--display); font-size: 26px; line-height: 1.12; letter-spacing: -0.015em; margin: 0; }
+.card p { margin: 0; color: var(--muted); max-width: 62ch; }
+.card p b { color: var(--fg); font-weight: 500; }
+.where { font-family: var(--mono); font-size: 12px; color: var(--accent); margin: 0 0 8px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: auto 0 0; padding: 0; list-style: none; }
+.tags li { font-family: var(--mono); font-size: 12px; color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); padding: 3px 9px; border-radius: 3px; }
+
+.featured { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; margin-bottom: 20px; }
+.featured .card { border: 0; padding: 0; background: none; }
+.pipe { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; align-self: center; border-left: 1px solid var(--line); }
+.pipe li { position: relative; padding: 0 0 22px 28px; }
+.pipe li:last-child { padding-bottom: 0; }
+.pipe li::before { content: ""; position: absolute; left: -5px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.pipe li:last-child::before { background: var(--accent); }
+.pipe b { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); display: block; }
+.pipe span { font-size: 15px; color: var(--muted); }
+
+.two { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.models { margin: 0; padding: 0; list-style: none; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; font-family: var(--mono); font-size: 13px; }
+.models li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 14px; border-top: 1px solid var(--line); background: var(--surface-2); color: var(--muted); }
+.models li:first-child { border-top: 0; }
+.models li.best { background: var(--accent-soft); color: var(--accent); }
+
+.more { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0; margin-top: 20px; border-top: 1px solid var(--line); }
+.more div { padding: 18px 20px 18px 0; border-bottom: 1px solid var(--line); }
+.more h4 { font-family: var(--display); font-size: 17px; margin: 0 0 4px; }
+.more p { margin: 0; font-size: 14px; color: var(--muted); }
+.more h4 a { text-decoration: none; }
+.more h4 a::after { content: " ↗"; color: var(--accent); font-family: var(--mono); font-size: 13px; }
+.more h4 a:hover { color: var(--accent); }
+
+/* experience */
+.ledger { margin: 0; padding: 0; list-style: none; }
+.ledger li { display: grid; grid-template-columns: 150px minmax(0, 1.1fr) minmax(0, 1.6fr); gap: 28px; padding: 22px 0; border-top: 1px solid var(--line); align-items: baseline; }
+.ledger li:last-child { border-bottom: 1px solid var(--line); }
+.ledger time { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.ledger h3 { font-family: var(--display); font-size: 20px; margin: 0; }
+.ledger .org { margin: 2px 0 0; font-size: 14px; color: var(--accent); }
+.ledger p.d { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.skills > div { border: 1px solid var(--line); border-radius: 8px; padding: 22px; background: var(--surface); }
+.skills h3 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+.skills ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 15px; }
+.skills .learn li { color: var(--muted); }
+
+.edu { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 28px; padding-block: 22px; border-block: 1px solid var(--line); align-items: baseline; }
+.edu time { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.edu h3 { font-family: var(--display); font-size: 20px; margin: 0 0 4px; }
+.edu p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.cta { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 40px; }
+.cta h2 { font-family: var(--display); font-size: clamp(28px, 4vw, 44px); letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 14px; max-width: 18ch; text-wrap: balance; }
+.cta p { margin: 0; color: var(--muted); max-width: 52ch; }
+.links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; align-items: center; }
+.links a, .links button { font-family: var(--mono); font-size: 14px; color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); padding: 11px 18px; border-radius: 4px; text-decoration: none; cursor: pointer; }
+.links a:hover, .links button:hover { border-color: var(--accent); color: var(--accent); }
+.links a.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 500; }
+.links a.primary:hover { color: var(--accent-ink); }
+.cta p.mail { margin-top: 36px; font-family: var(--mono); font-size: 14px; color: var(--muted); }
+.mail span { color: var(--fg); user-select: all; }
+
+/* reel */
+.reel { padding-block: 8px 40px; }
+.reel-frame { position: relative; background: #000; border-radius: 4px; overflow: hidden; aspect-ratio: 1964 / 1080; cursor: pointer; }
+.reel-frame.on { cursor: default; }
+.reel-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
+.reel-frame i { position: absolute; width: 28px; height: 28px; border: 0 solid var(--accent); pointer-events: none; z-index: 2; }
+.reel-frame i:nth-of-type(1) { top: 14px; left: 14px; border-top-width: 3px; border-left-width: 3px; }
+.reel-frame i:nth-of-type(2) { top: 14px; right: 14px; border-top-width: 3px; border-right-width: 3px; }
+.reel-frame i:nth-of-type(3) { bottom: 14px; left: 14px; border-bottom-width: 3px; border-left-width: 3px; }
+.reel-frame i:nth-of-type(4) { bottom: 14px; right: 14px; border-bottom-width: 3px; border-right-width: 3px; }
+.reel-frame .play { position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px 0 0 -42px; padding: 0; border-radius: 50%; background: rgba(10, 14, 22, 0.55); border: 2px solid var(--accent); z-index: 3; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+.reel-frame .play::after { content: ""; position: absolute; left: 50%; top: 50%; margin: -13px 0 0 -8px; border-style: solid; border-width: 13px 0 13px 22px; border-color: transparent transparent transparent var(--accent); }
+.reel-frame:hover .play, .reel-frame .play:focus-visible { background: var(--accent); transform: scale(1.06); }
+.reel-frame:hover .play::after, .reel-frame .play:focus-visible::after { border-left-color: var(--accent-ink); }
+.reel-bar { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; padding-top: 20px; }
+.reel-bar h2 { font-family: var(--display); font-weight: 700; font-size: 34px; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 6px; }
+.reel-bar p { margin: 0; color: var(--muted); font-size: 15px; max-width: 52ch; }
+.reel-meta { font-family: var(--mono); font-size: 12px; color: var(--accent); margin: 0 0 8px; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 56px 40px; }
+  .frame { justify-self: start; max-width: 300px; }
+  .featured, .two { grid-template-columns: minmax(0, 1fr); }
+  .featured { gap: 28px; }
+  .ledger li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .edu { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+}
+@media (max-width: 520px) {
+  .card { padding: 22px; }
+  .cta { padding: 26px; }
+  .bar nav { gap: 16px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: transform 0.15s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .card { transition: border-color 0.15s ease; }
+  .card:hover { border-color: var(--accent); }
+}
+</style>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top">omar.ganoub</a>
+    <nav aria-label="Sections">
+      <a href="#reel">Reel</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap" id="top">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">AI / ML engineer in training · New Cairo, Egypt</p>
+      <h1>I build computer vision and ML systems that run.</h1>
+      <p class="lede">Hi, I'm <b>Omar Ganoub</b>, a computer science student finishing a dual degree in 2027. I've shipped a face recognition access system, and trained CNNs from scratch.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#work">See my work</a>
+        <a class="btn" href="https://github.com/omarganoub77" target="_blank" rel="noopener">GitHub</a>
+        <span class="avail"><i aria-hidden="true"></i>Open to AI/ML internships and freelance projects</span>
+      </div>
+    </div>
+    <div class="frame" aria-hidden="true">
+      <svg viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+        <g class="grid">
+          <line x1="0" y1="95" x2="380" y2="95"/><line x1="0" y1="190" x2="380" y2="190"/><line x1="0" y1="285" x2="380" y2="285"/>
+          <line x1="95" y1="0" x2="95" y2="380"/><line x1="190" y1="0" x2="190" y2="380"/><line x1="285" y1="0" x2="285" y2="380"/>
+        </g>
+        <ellipse class="face" cx="190" cy="196" rx="62" ry="78"/>
+        <circle class="face" cx="166" cy="180" r="7"/>
+        <circle class="face" cx="214" cy="180" r="7"/>
+        <path class="face" d="M168 226 Q190 244 212 226" fill="none"/>
+        <path class="c" d="M96 130 V96 H130"/>
+        <path class="c" d="M250 96 H284 V130"/>
+        <path class="c" d="M96 262 V296 H130"/>
+        <path class="c" d="M250 296 H284 V262"/>
+        <rect class="hl" x="96" y="70" width="104" height="18"/>
+        <text x="102" y="83" style="fill: var(--accent-ink)">face_detected</text>
+        <text x="96" y="322">cv2 → DeepFace → access</text>
+      </svg>
+    </div>
+  </header>
+
+  <section class="reel" id="reel" aria-label="Egypt 2099 video">
+    <div class="reel-frame" id="reel-frame">
+      <video id="reel-video" src="egypt-2099.mp4" poster="egypt-2099-poster.jpg" preload="none" playsinline aria-label="AI-generated video of Cairo in the year 2099, with golden towers, bridges and the pyramids at sunset"></video>
+      <i></i><i></i><i></i><i></i>
+      <button type="button" class="play" id="reel-start" aria-label="Play Egypt 2099"></button>
+    </div>
+    <div class="reel-bar">
+      <div>
+        <p class="reel-meta">AI video · 12 seconds · press the image to play</p>
+        <h2>Egypt, 2099</h2>
+        <p>A futuristic Cairo at golden hour, generated with AI video tools.</p>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var v = document.getElementById("reel-video");
+        var frame = document.getElementById("reel-frame");
+        var btn = document.getElementById("reel-start");
+        var started = false;
+        function start() {
+          if (started) return;
+          started = true;
+          btn.hidden = true;
+          frame.classList.add("on");
+          v.controls = true;
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+        btn.addEventListener("click", start);
+        frame.addEventListener("click", start);
+      })();
+    </script>
+  </section>
+
+  <section id="work">
+    <div class="head"><h2 class="title">Selected work</h2><span>3 featured, 8 more below</span></div>
+
+    <div class="two">
+      <div class="card">
+        <div>
+          <p class="where">Orange Egypt · Data Science team · July 2026</p>
+          <h3>Face recognition access control</h3>
+        </div>
+        <p>An access control system that decides who is allowed in by recognizing faces from a live camera feed. <b>OpenCV</b> captures frames and finds the face in each one, then <b>DeepFace</b> compares it against the faces of enrolled people to confirm who it is. A match grants access and an unknown face is denied.</p>
+        <p>I built it during my internship at Orange as a working prototype of face-based authentication, and <b>the full code is on GitHub</b>.</p>
+        <ul class="tags"><li>Python</li><li>OpenCV</li><li>DeepFace</li><li>Face detection</li><li>Face verification</li></ul>
+      </div>
+      <div class="card">
+        <div>
+          <p class="where">DOT PY Data Science &amp; AI Program</p>
+          <h3>Emotion detection with CNNs</h3>
+        </div>
+        <p>Six emotion classes (angry, disgust, fear, happy, sad, surprise) on 96×96 images. I wrote a <b>CNN from scratch in NumPy</b>, moved to the pretrained HSEmotion model for accuracy, and cut overfitting in a TensorFlow version using augmentation, normalization and dropout tuning.</p>
+        <ul class="tags"><li>NumPy</li><li>TensorFlow</li><li>HSEmotion</li><li>Augmentation</li></ul>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="where">SQUAD Business Consulting · Jul – Sep 2025</p>
+          <h3>Odoo 18 Smart Scanner</h3>
+        </div>
+        <p>A <b>barcode-driven stock automation tool</b> for Odoo 18, written in Python. It replaces manual stock entry with barcode scanning, so warehouse and inventory updates are faster and less error-prone. I built it during my software development internship at SQUAD Business Consulting.</p>
+        <ul class="tags"><li>Python</li><li>Odoo 18</li><li>Barcode scanning</li><li>Inventory automation</li></ul>
+      </div>
+    </div>
+
+    <div class="more">
+      <div><h4>Heart disease prediction</h4><p>Logistic regression with full metrics and decision boundary plots.</p></div>
+      <div><h4>Steam game popularity</h4><p>RidgeCV and logistic regression, with SelectKBest, GridSearchCV and a saved model.</p></div>
+      <div><h4>Olist e-commerce SQL</h4><p>Ten cleaning tasks and business queries on the Brazilian Olist dataset.</p></div>
+      <div><h4>Higgsfield image generation</h4><p>Generative image work, part of my ongoing exploration of generative AI.</p></div>
+      <div><h4><a href="https://github.com/omarganoub77/Phone-Price-Prediction" target="_blank" rel="noopener">Smartphone price prediction</a></h4><p>Classifies phones as expensive or not from their specs. Feature selection cut 35 features to 20, and RandomForest reached 92.5% accuracy against SVC and logistic regression. Includes a Streamlit app.</p></div>
+      <div><h4><a href="https://github.com/omarganoub77/Gym-Tracker" target="_blank" rel="noopener">Gym Tracker</a></h4><p>A mobile-first progressive web app for logging workouts set by set, with five training programs, last-session comparison and drag and drop. Vanilla JavaScript, Tailwind and LocalStorage, no account needed.</p></div>
+      <div><h4><a href="https://github.com/omarganoub77/Saraha-project" target="_blank" rel="noopener">Saraha anonymous messaging</a></h4><p>A C++ console app for sending anonymous messages, with login and ID verification, undo for sent messages, contact search and favorites. Built with object-oriented design and CMake.</p></div>
+      <div><h4><a href="https://github.com/MinaBoktor/RSA-secureX" target="_blank" rel="noopener">RSA SecureX</a></h4><p>RSA encryption in C# on a custom big-integer type that handles hundreds of digits, with modular exponentiation, Miller-Rabin prime generation and string encryption.</p></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="head"><h2 class="title">Experience</h2></div>
+    <ol class="ledger">
+      <li>
+        <time>Jul 2026</time>
+        <div><h3>Data Science Intern</h3><p class="org">Orange Egypt</p></div>
+        <p class="d">One month on the Data Science team: explored generative AI and built the face recognition access control system.</p>
+      </li>
+      <li>
+        <time>Jul – Sep 2025</time>
+        <div><h3>Software Development Intern</h3><p class="org">SQUAD Business Consulting</p></div>
+        <p class="d">Built the Odoo 18 Smart Scanner, a barcode-driven stock automation tool in Python.</p>
+      </li>
+      <li>
+        <time>Aug 2024</time>
+        <div><h3>IT &amp; Security Intern</h3><p class="org">Arab African International Bank</p></div>
+        <p class="d">Internship in the bank's IT and security function.</p>
+      </li>
+      <li>
+        <time>Jun 2023 – 2024</time>
+        <div><h3>Teaching Assistant, ICT &amp; Maths</h3><p class="org">Capital International School</p></div>
+        <p class="d">Supported ICT and maths classes.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="skills">
+    <div class="head"><h2 class="title">Skills</h2></div>
+    <div class="skills">
+      <div><h3>Machine learning</h3><ul><li>scikit-learn</li><li>XGBoost</li><li>TensorFlow</li><li>PyTorch</li><li>CNNs</li><li>Model tuning</li></ul></div>
+      <div><h3>Computer vision</h3><ul><li>OpenCV</li><li>DeepFace</li><li>HOG + SVM</li><li>Emotion recognition</li></ul></div>
+      <div><h3>Code and data</h3><ul><li>Python</li><li>Java</li><li>SQL</li><li>NumPy</li><li>pandas</li><li>Git</li></ul></div>
+      <div><h3>Also</h3><ul><li>Odoo</li><li>Blender</li><li>Rigging</li><li>Animation</li></ul></div>
+      <div><h3>Learning now</h3><ul class="learn"><li>AI agents</li><li>Generative AI</li><li>RAG</li><li>Frameworks</li><li>Higgsfield</li><li>AI image generation</li><li>AI video generation</li></ul></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="head"><h2 class="title">Education</h2></div>
+    <div class="edu">
+      <time>Graduating 2027</time>
+      <div>
+        <h3>B.Sc. Computer Science, dual degree</h3>
+        <p>Ain Shams University and University of East London</p>
+        <p>Neural networks, machine learning, operating systems, computer graphics, Java OOP</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="cta">
+      <h2>Have an AI or ML project in mind?</h2>
+      <p>I'm looking for internships and freelance work in data science, computer vision and generative AI.</p>
+      <div class="links">
+        <a class="primary" href="https://www.linkedin.com/in/omarganoub" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="primary" href="https://github.com/omarganoub77" target="_blank" rel="noopener">GitHub</a>
+        <button type="button" id="copy-mail">Copy email</button>
+      </div>
+      <p class="mail">Email: <span>omarganoub@gmail.com</span></p>
+    </div>
+    <script>
+      (function () {
+        var btn = document.getElementById("copy-mail");
+        var addr = "omarganoub@gmail.com";
+        btn.addEventListener("click", function () {
+          var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy email"; }, 1800); };
+          var fallback = function () {
+            var s = document.querySelector(".mail span");
+            var r = document.createRange(); r.selectNodeContents(s);
+            var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+            btn.textContent = "Press copy";
+          };
+          try {
+            navigator.clipboard.writeText(addr).then(done, fallback);
+          } catch (e) { fallback(); }
+        });
+      })();
+    </script>
+  </section>
+</div>
+
+</body></html>
