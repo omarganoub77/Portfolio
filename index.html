@@ -164,27 +164,30 @@ h2.title { font-family: var(--display); font-weight: 700; font-size: 34px; lette
 
 /* reel */
 .reel { padding-block: 8px 40px; }
-.reel-frame { position: relative; background: #000; border-radius: 4px; overflow: hidden; aspect-ratio: 1964 / 1080; cursor: pointer; }
+.reels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.reel-item { min-width: 0; }
+.reel-frame { position: relative; background: #000; border-radius: 4px; overflow: hidden; aspect-ratio: 16 / 9; cursor: pointer; }
 .reel-frame.on { cursor: default; }
 .reel-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
-.reel-frame i { position: absolute; width: 28px; height: 28px; border: 0 solid var(--accent); pointer-events: none; z-index: 2; }
+.reel-frame i { position: absolute; width: 24px; height: 24px; border: 0 solid var(--accent); pointer-events: none; z-index: 2; }
 .reel-frame i:nth-of-type(1) { top: 14px; left: 14px; border-top-width: 3px; border-left-width: 3px; }
 .reel-frame i:nth-of-type(2) { top: 14px; right: 14px; border-top-width: 3px; border-right-width: 3px; }
 .reel-frame i:nth-of-type(3) { bottom: 14px; left: 14px; border-bottom-width: 3px; border-left-width: 3px; }
 .reel-frame i:nth-of-type(4) { bottom: 14px; right: 14px; border-bottom-width: 3px; border-right-width: 3px; }
-.reel-frame .play { position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px 0 0 -42px; padding: 0; border-radius: 50%; background: rgba(10, 14, 22, 0.55); border: 2px solid var(--accent); z-index: 3; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+.reel-frame .play { position: absolute; left: 50%; top: 50%; width: 72px; height: 72px; margin: -36px 0 0 -36px; padding: 0; border-radius: 50%; background: rgba(10, 14, 22, 0.55); border: 2px solid var(--accent); z-index: 3; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
 .reel-frame .play::after { content: ""; position: absolute; left: 50%; top: 50%; margin: -13px 0 0 -8px; border-style: solid; border-width: 13px 0 13px 22px; border-color: transparent transparent transparent var(--accent); }
 .reel-frame:hover .play, .reel-frame .play:focus-visible { background: var(--accent); transform: scale(1.06); }
 .reel-frame:hover .play::after, .reel-frame .play:focus-visible::after { border-left-color: var(--accent-ink); }
 .reel-bar { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; padding-top: 20px; }
-.reel-bar h2 { font-family: var(--display); font-weight: 700; font-size: 34px; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 6px; }
+.reel-bar h3 { font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 6px; }
 .reel-bar p { margin: 0; color: var(--muted); font-size: 15px; max-width: 52ch; }
 .reel-meta { font-family: var(--mono); font-size: 12px; color: var(--accent); margin: 0 0 8px; }
+.card p a { color: var(--accent); text-underline-offset: 3px; }
 
 @media (max-width: 860px) {
   .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 56px 40px; }
   .frame { justify-self: start; max-width: 300px; }
-  .featured, .two { grid-template-columns: minmax(0, 1fr); }
+  .featured, .two, .reels { grid-template-columns: minmax(0, 1fr); }
   .featured { gap: 28px; }
   .ledger li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .edu { grid-template-columns: minmax(0, 1fr); gap: 6px; }
@@ -248,36 +251,58 @@ h2.title { font-family: var(--display); font-weight: 700; font-size: 34px; lette
     </div>
   </header>
 
-  <section class="reel" id="reel" aria-label="Egypt 2099 video">
-    <div class="reel-frame" id="reel-frame">
-      <video id="reel-video" src="egypt-2099.mp4" poster="egypt-2099-poster.jpg" preload="none" playsinline aria-label="AI-generated video of Cairo in the year 2099, with golden towers, bridges and the pyramids at sunset"></video>
-      <i></i><i></i><i></i><i></i>
-      <button type="button" class="play" id="reel-start" aria-label="Play Egypt 2099"></button>
-    </div>
-    <div class="reel-bar">
-      <div>
-        <p class="reel-meta">AI video · 12 seconds · press the image to play</p>
-        <h2>Egypt, 2099</h2>
-        <p>A futuristic Cairo at golden hour, generated with AI video tools.</p>
+  <section class="reel" id="reel" aria-label="AI video reel">
+    <div class="head"><h2 class="title">Reel</h2><span>AI video · press an image to play</span></div>
+    <div class="reels">
+      <div class="reel-item">
+        <div class="reel-frame">
+          <video src="egypt-2099.mp4" poster="egypt-2099-poster.jpg" preload="none" playsinline aria-label="AI-generated video of Cairo in the year 2099, with golden towers, bridges and the pyramids at sunset"></video>
+          <i></i><i></i><i></i><i></i>
+          <button type="button" class="play" aria-label="Play Egypt 2099"></button>
+        </div>
+        <div class="reel-bar">
+          <div>
+            <p class="reel-meta">AI video · 12 seconds</p>
+            <h3>Egypt, 2099</h3>
+            <p>A futuristic Cairo at golden hour, generated with AI video tools.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reel-item">
+        <div class="reel-frame">
+          <video src="perfume-ad.mp4" poster="perfume-ad-poster.jpg" preload="none" playsinline aria-label="AI-generated perfume advertisement for a bottle labeled NOIRÉ, with warm amber liquid on a dark background"></video>
+          <i></i><i></i><i></i><i></i>
+          <button type="button" class="play" aria-label="Play NOIRÉ perfume ad"></button>
+        </div>
+        <div class="reel-bar">
+          <div>
+            <p class="reel-meta">AI video · 19 seconds</p>
+            <h3>NOIRÉ</h3>
+            <p>A cinematic perfume product ad, generated with AI video tools.</p>
+          </div>
+        </div>
       </div>
     </div>
     <script>
       (function () {
-        var v = document.getElementById("reel-video");
-        var frame = document.getElementById("reel-frame");
-        var btn = document.getElementById("reel-start");
-        var started = false;
-        function start() {
-          if (started) return;
-          started = true;
-          btn.hidden = true;
-          frame.classList.add("on");
-          v.controls = true;
-          var p = v.play();
-          if (p && p.catch) p.catch(function () {});
-        }
-        btn.addEventListener("click", start);
-        frame.addEventListener("click", start);
+        var frames = document.querySelectorAll(".reel-frame");
+        Array.prototype.forEach.call(frames, function (frame) {
+          var v = frame.querySelector("video");
+          var btn = frame.querySelector(".play");
+          var started = false;
+          function start() {
+            if (started) return;
+            started = true;
+            Array.prototype.forEach.call(document.querySelectorAll(".reel-frame video"), function (o) { if (o !== v) o.pause(); });
+            btn.hidden = true;
+            frame.classList.add("on");
+            v.controls = true;
+            var p = v.play();
+            if (p && p.catch) p.catch(function () {});
+          }
+          btn.addEventListener("click", start);
+          frame.addEventListener("click", start);
+        });
       })();
     </script>
   </section>
@@ -292,7 +317,7 @@ h2.title { font-family: var(--display); font-weight: 700; font-size: 34px; lette
           <h3>Face recognition access control</h3>
         </div>
         <p>An access control system that decides who is allowed in by recognizing faces from a live camera feed. <b>OpenCV</b> captures frames and finds the face in each one, then <b>DeepFace</b> compares it against the faces of enrolled people to confirm who it is. A match grants access and an unknown face is denied.</p>
-        <p>I built it during my internship at Orange as a working prototype of face-based authentication, and <b>the full code is on GitHub</b>.</p>
+        <p>I built it during my internship at Orange as a working prototype of face-based authentication, and <b><a href="https://github.com/omarganoub77/Face-Recognition-Access-Control" target="_blank" rel="noopener">the full code is on GitHub</a></b>.</p>
         <ul class="tags"><li>Python</li><li>OpenCV</li><li>DeepFace</li><li>Face detection</li><li>Face verification</li></ul>
       </div>
       <div class="card">
@@ -322,7 +347,7 @@ h2.title { font-family: var(--display); font-weight: 700; font-size: 34px; lette
       <div><h4><a href="https://github.com/omarganoub77/Phone-Price-Prediction" target="_blank" rel="noopener">Smartphone price prediction</a></h4><p>Classifies phones as expensive or not from their specs. Feature selection cut 35 features to 20, and RandomForest reached 92.5% accuracy against SVC and logistic regression. Includes a Streamlit app.</p></div>
       <div><h4><a href="https://github.com/omarganoub77/Gym-Tracker" target="_blank" rel="noopener">Gym Tracker</a></h4><p>A mobile-first progressive web app for logging workouts set by set, with five training programs, last-session comparison and drag and drop. Vanilla JavaScript, Tailwind and LocalStorage, no account needed.</p></div>
       <div><h4><a href="https://github.com/omarganoub77/Saraha-project" target="_blank" rel="noopener">Saraha anonymous messaging</a></h4><p>A C++ console app for sending anonymous messages, with login and ID verification, undo for sent messages, contact search and favorites. Built with object-oriented design and CMake.</p></div>
-      <div><h4><a href="https://github.com/MinaBoktor/RSA-secureX" target="_blank" rel="noopener">RSA SecureX</a></h4><p>RSA encryption in C# on a custom big-integer type that handles hundreds of digits, with modular exponentiation, Miller-Rabin prime generation and string encryption.</p></div>
+      <div><h4><a href="https://github.com/MinaBoktor/RSA-secureX" target="_blank" rel="noopener">RSA SecureX</a></h4><p>Team project. RSA encryption in C# on a custom big-integer type that handles hundreds of digits, with modular exponentiation, Miller-Rabin prime generation and string encryption.</p></div>
     </div>
   </section>
 
